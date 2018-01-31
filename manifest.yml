@@ -1,7 +1,23 @@
 ---
 applications:
-- name: spring-music
+- name: spring-music-mysql
+  buildpack: java_buildpack
   memory: 1G
   random-route: true
   path: build/libs/spring-music.jar
+  services:
+  - spring-rdbms
+  - spring-messages
+  env:
+    SPRING_APPLICATION_JSON: '{"management":{"info":{"git":{"mode":"full"}}}}'
+- name: spring-music-mongo
+  buildpack: java_buildpack
+  memory: 1G
+  random-route: true
+  path: build/libs/spring-music.jar
+  services:
+  - spring-nosql
+  - spring-messages
+  env:
+    SPRING_APPLICATION_JSON: '{"management":{"info":{"git":{"mode":"full"}}}}'
 
